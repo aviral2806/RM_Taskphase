@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+int main(){
+    int num=0;
+    cout << "Enter number: ";
+    cin >> num;
+    char hex[20];
+    int i=0;
+    int temp=num;
+    while(temp>0){
+        if(temp%16<10){
+            hex[i++]=48+(temp%16);
+        }
+        else{
+            hex[i++]=55+(temp%16);
+        }
+        temp/=16;
+ }
+    
+    cout << "Number in hexadecimal system is: ";
+    i--;
+    while(i>=0){
+        cout << hex[i];
+        i--;
+    }
+    
+    cout << endl;
+    temp=num;
+    int oct[10]={0};
+    i=0;
+    while(temp>0){
+        oct[i++]=temp%8;
+        temp/=8;
+    }
+    cout << "Number in octal system is: ";
+    i--;
+    while(i>=0){
+        cout << oct[i];
+        i--;
+    }
+    int binary[40]={0};
+    temp=num;
+    i=0;
+    while(temp>0){
+        binary[i++]=temp%2;
+        temp/=2;
+    }
+    cout << "\nNumber in binary system is: ";
+    i--;
+    while(i>=0){
+        cout << binary[i];
+        i--;
+    }
+    cout << endl;
+    return 0;
+}
