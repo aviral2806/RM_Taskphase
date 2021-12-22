@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+int main(){
+    int first[10][10]={0};
+    int second[10][10]={0};
+    int answer[10][10]={0};
+    int row1=0;
+    int col1=0;
+    cout << "Enter rows and columns for first matrix separated by space: ";
+    cin >> row1 >> col1;
+    cout << endl << "Enter numbers for the first matrix row wise separated by space: ";
+    for(int i=0;i<row1;i++){
+        for(int j=0;j<col1;j++){
+            cin >> first[i][j];
+        }
+    }
+    int row2=0;
+    int col2=0;
+    cout << "Enter rows and columns for second matrix separated by space: ";
+    cin >> row2 >> col2;
+    if(col1!=row2){
+        cout << "Given matrices aren't compatible for multiplication" << endl;
+        }
+    else{
+        cout << endl << "Compatible for multiplication, enter numbers for second matrix row wise separated by a space: ";
+        for(int i=0;i<row2;i++){
+        for(int j=0;j<col2;j++){
+            cin >> second[i][j];
+        }
+    }
+    
+    for(int i=0;i<row1;i++){
+        for(int j=0;j<col2;j++){
+            int sum=0;
+            for(int t=0;t<row2;t++){
+                sum+=first[i][t]*second[t][j];
+            }
+            answer[i][j]=sum;
+        }
+    }
+    
+   cout  << "The answer is: " << endl;
+   cout << '[';
+    for(int i=0;i<row1;i++){
+        for(int j=0;j<col2;j++){
+            cout << answer[i][j] << ' ';
+        }
+    cout << endl;
+ }
+ cout << ']';
+    
+    
+    
+    }    
+ 
+ 
+ 
+ return 0;
+}
