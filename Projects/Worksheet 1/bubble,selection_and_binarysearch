@@ -1,0 +1,114 @@
+#include <iostream>
+using namespace std;
+
+int binary(int array[], int low, int high, int key){
+    while(low<=high){
+        int mid=(low+high)/2;
+        if(array[mid]==key){
+            return mid;
+        }
+        else if(array[mid]>key){
+            return binary(array,0,mid-1,key);
+        }
+        else{
+            return binary(array,mid+1,high,key);
+        }
+    }
+    return -1;
+}
+
+void print(int arr[], int n){
+    for(int i=0;i<n;i++){
+        cout << arr[i] << ' ';
+    }
+    cout << endl;
+}
+void bubble(int arr[], int n){
+if(n==1){
+    return;
+}    
+    bool swapSwitch=false;
+    for(int i=0;i<n-1;i++){
+        if(arr[i]>arr[i+1]){
+            int temp=arr[i];
+            arr[i]=arr[i+1];
+            arr[i+1]=temp;
+            swapSwitch=true;
+        }
+    }
+    if(!swapSwitch){
+        return;
+    }
+    else{
+        bubble(arr,n-1);
+    }
+}
+
+void selection(int arr[], int low, int n){
+    if(low==n-1){
+        return;
+    }
+    int least=arr[low];
+    int leastIndex=low;
+    for(int i=low;i<n;i++){
+        if(arr[i]<least){
+            least=arr[i];
+            leastIndex=i;
+        }
+    }
+    if(leastIndex!=low){
+        int temp=arr[low];
+        arr[low]=least;
+        arr[leastIndex]=temp;
+    }
+    
+    selection(arr,low+1,n);
+}
+
+int main(){
+    char selec;
+    int arr[20];
+    cout << "Enter number of elements for array: ";
+    int n=0;
+    cin >> n;
+    cout << "\nEnter numbers for array separated by space: ";
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    
+    cout << "\nEnter 'b' for bubble sort and 's' for selection sort: ";
+    cin >> selec;
+    if(selec=='b'||selec=='B'){
+        bubble(arr,n);
+        cout << "Array sorted by bubble sort: ";
+        print(arr,n);
+    }
+    
+    else if(selec=='s'||selec=='S'){
+        selection(arr,0,n);
+        cout << "Array sorted by selection sort: ";
+        print(arr,n);
+    }
+    
+    else{
+        cout << "\nInvalid selection";
+    }
+    
+    int target=0;
+    cout << "Enter number to search for in the sorted array: ";
+    cin >> target;
+    int ans=binary(arr,0,n,target);
+    if(ans==-1){
+        cout << "\nNumber not present in array\n";
+    }
+    
+    else{
+        cout << "\nNumber is at index: " << ans << endl;
+    }
+    
+    
+    
+    
+    
+    return 0;
+}
