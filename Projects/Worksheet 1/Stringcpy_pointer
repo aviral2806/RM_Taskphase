@@ -1,0 +1,19 @@
+
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+    char original[20]={'0'};
+    char newstr[20]={'0'};
+    cout << "Enter string which has to be copied: ";
+    cin >> original;
+    char*p=original;
+    char *t= newstr;
+    for(int i=0;original[i]!='\0';i++){
+        *(t+i)=*(p+i);
+    }
+    cout << endl << "Original string: " << p << endl << "New string: " << t << endl;
+}
