@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+
+int euclidgcd(int small, int large){
+    if(small==0){
+        return large;
+    }
+
+    euclidgcd(large%small,small);    
+}
+
+int main()
+{
+    int a=0;
+    int b=0;
+    cout << "Enter 2 numbers to calculate gcd of: ";
+    cin >> a >> b;
+    int gcd=0;
+    if(a>=b){
+        gcd=euclidgcd(b,a);
+    }
+    else{
+        gcd=euclidgcd(a,b);
+    }
+
+    cout << "\nGcd of given two numbers using euclidean algorithm is: " << gcd << endl;    
+}
