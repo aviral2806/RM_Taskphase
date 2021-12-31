@@ -1,0 +1,38 @@
+const int ultraPin=7;
+void setup() {
+  
+  // put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+  long duration=0;
+  long distance=0;
+  pinMode(ultraPin, OUTPUT);
+  digitalWrite(ultraPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ultraPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(ultraPin, LOW);
+  pinMode(ultraPin, INPUT);
+  duration=pulseIn(ultraPin, HIGH);
+  distance=(duration/74/2);
+  Serial.print(distance);
+  Serial.print("in");
+  Serial.println();
+  if(distance>=15&&distance<50){
+  digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else if(distance>=50){
+   digitalWrite(LED_BUILTIN, LOW);
+    
+  }
+  else if(distance<15&&distance>0){
+   digitalWrite(LED_BUILTIN, LOW); 
+  }
+  delay(100);
+  
+}
