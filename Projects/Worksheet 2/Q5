@@ -1,0 +1,27 @@
+const int ultraPin=7;
+void setup() {
+  
+  // put your setup code here, to run once:
+Serial.begin(9600);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  long duration=0;
+  long distance=0;
+  pinMode(ultraPin, OUTPUT);
+  digitalWrite(ultraPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ultraPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(ultraPin, LOW);
+  pinMode(ultraPin, INPUT);
+  duration=pulseIn(ultraPin, HIGH);
+  distance=(duration/29/2);
+  Serial.print(distance);
+  Serial.print("cm");
+  Serial.println();
+  delay(100);
+  
+}
