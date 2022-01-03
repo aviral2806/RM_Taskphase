@@ -1,0 +1,95 @@
+const int led1red=11;
+const int led1blue=10;
+const int led2red=13;
+const int led2blue=12;
+const int buttonpin=2;
+int buttonState=0;
+const int ultraPin=7;
+const int led1green=9;
+const int led2green=8;
+int volt=0;
+int brightness=0;
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(13, OUTPUT);
+pinMode(12, OUTPUT);
+pinMode(11, OUTPUT);
+pinMode(10, OUTPUT);
+pinMode(2, INPUT);
+pinMode(9, OUTPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+long duration=0;
+  long distance=0;
+  pinMode(ultraPin, OUTPUT);
+  digitalWrite(ultraPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ultraPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(ultraPin, LOW);
+  pinMode(ultraPin, INPUT);
+  duration=pulseIn(ultraPin, HIGH);
+  distance=(duration/74/2);
+  //Serial.print(distance);
+  //Serial.print("in");
+  //Serial.println();
+  buttonState=digitalRead(buttonpin);
+  Serial.print(buttonState);
+  if( buttonState==1){
+  digitalWrite(led1green, HIGH);
+    digitalWrite(led1blue, HIGH);
+    digitalWrite(led1red, HIGH);
+  }
+  else{  
+   if(distance>=15&&distance<50){
+	 digitalWrite(led1green, LOW);
+     digitalWrite(led1red, LOW);
+     
+     digitalWrite(led1blue, HIGH);
+     
+  }
+  else if(distance>=50){
+    digitalWrite(led1red, LOW);
+    digitalWrite(led1blue, LOW);
+    digitalWrite(led1green, HIGH);
+    
+  }
+  else if(distance<15&&distance>0){
+    digitalWrite(led1green, LOW);
+    digitalWrite(led1blue, LOW);
+    digitalWrite(led1red, HIGH); 
+  }
+  delay(100);
+  } 
+	volt=analogRead(A0);
+  	brightness=map(volt, 0, 1023, 0, 255);
+ 
+ 
+    if(brightness<=20){
+      digitalWrite(led2green, LOW);
+    digitalWrite(led2blue, HIGH);
+    digitalWrite(led2red, LOW);
+    }
+    
+    else if(brightness>20&&brightness<=75){
+     digitalWrite(led2green, HIGH);
+    digitalWrite(led2blue, LOW);
+    digitalWrite(led2red, LOW); 
+      
+    }
+    else{
+     digitalWrite(led2green, LOW);
+    digitalWrite(led2blue, LOW);
+    digitalWrite(led2red, HIGH); 
+      
+    }
+    
+    
+    delay(100);
+  
+
+}
