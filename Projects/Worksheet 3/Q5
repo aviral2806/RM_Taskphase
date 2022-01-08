@@ -1,0 +1,36 @@
+const int ultraPin=7;
+void setup() {
+  
+  // put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(11, OUTPUT);
+pinMode(10, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  long duration=0;
+  long distance=0;
+  long dcvalue=0;
+  pinMode(ultraPin, OUTPUT);
+  digitalWrite(ultraPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ultraPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(ultraPin, LOW);
+  pinMode(ultraPin, INPUT);
+  duration=pulseIn(ultraPin, HIGH);
+  distance=(duration/29/2);
+  Serial.print(distance);
+  Serial.print("cm");
+  Serial.println();
+  delay(100); 
+  if(distance>=10&&distance<336){
+  dcvalue=map(distance,10,336,0,255);
+  digitalWrite(10, LOW);
+  analogWrite(11, dcvalue);
+  }
+    
+  
+  
+}
